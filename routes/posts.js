@@ -26,16 +26,20 @@ router.post("",function(){})
 //게시글 등록 API
 router.post("/posts/", async (req, res) => {
   const {user, password, title, content } = req.body;
+  // user === 123547nf823n34
   let today = new Date();
   const createdAt = today.toLocaleString()
-  const posts = await Post.findById({user});
-
-  if (posts.length) {
-    return res.status(400).json({
-      success: false,
-      errorMessage: "데이터 형식이 올바르지 않습니다."
-    });
-  }
+  // const posts = await Post.findById({user});
+  // const posts = await Post.find({user: "gkgkhjigkkk"});
+  // const posts = await Post.find({user: user});
+  // const posts = await Post.find({user});
+  
+  // if (posts.length) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     errorMessage: "데이터 형식이 올바르지 않습니다."
+  //   });
+  // }
   const createdPosts = await Post.create({user, password, title, content , createdAt});
 
   res.json({posts:createdPosts});
